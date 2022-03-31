@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Verify SDK release
+
+on: 
+  pull_request:
+  push:
+    branches:
+    - main
+    - github_actions_build
+    tags:
+      - 'v*'
+
+jobs:    
+  build_and_deploy:
+    name: Build and deploy
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: swift build
+      - name: Run tests
+        run: swift test
