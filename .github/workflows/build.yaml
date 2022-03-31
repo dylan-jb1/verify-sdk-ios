@@ -17,7 +17,8 @@ jobs:
     runs-on: macos-11
 
     steps:
-      - name: Code checkout
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v2
       - name: Build
-        use: mxcl/xcodebuild@v1
+        run: swift build
+      - name: Run tests
+        run: swift test
