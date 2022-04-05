@@ -23,6 +23,7 @@ jobs:
       - name: Build Adaptive documentation
         run: |
           xcodebuild -list
+          cd ./sdk/adaptive
           xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Find Adaptive documentation path
         id: find_adaptive
