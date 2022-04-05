@@ -30,11 +30,6 @@ jobs:
           xcodebuild -list
           cd ./sdk/core
           xcodebuild docbuild -scheme Core -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
-      - name: Build Authentication documentation
-        run: |
-          xcodebuild -list
-          cd ./sdk/authentication
-          xcodebuild docbuild -scheme Authentication -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build FIDO2 documentation
         run: |
           xcodebuild -list
@@ -62,7 +57,6 @@ jobs:
           git checkout ios_sdk_test
           cd ..
           cp -R "${{ steps.find_adaptive.outputs.docc_path }}" ibm-security-verify.github.io/ios/adaptive/docs
-          cp -R "${{ steps.find_authentication.outputs.docc_path }}" ibm-security-verify.github.io/ios/authentication/docs
           cp -R "${{ steps.find_core.outputs.docc_path }}" ibm-security-verify.github.io/ios/core/docs
           cp -R "${{ steps.find_fido2.outputs.docc_path }}" ibm-security-verify.github.io/ios/fido2/docs
           cd ibm-security-verify.github.io
