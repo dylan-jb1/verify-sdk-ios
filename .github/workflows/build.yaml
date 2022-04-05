@@ -22,8 +22,8 @@ jobs:
         uses: actions/checkout@v2
       - name: Build Adaptive documentation
         run: |
-        cd verify-sdk-ios
-        xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          cd verify-sdk-ios
+          xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Find Adaptive documentation path
         id: find_adaptive
         run: echo "::set-output name=docc_path::$(find ./docbuild -type d -iname 'Adaptive.doccarchive')"
