@@ -8,6 +8,7 @@ on:
     branches:
     - main
     - github_actions_build
+    - github_actions_build_test
     tags:
       - 'v*'
 
