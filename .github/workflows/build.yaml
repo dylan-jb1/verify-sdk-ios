@@ -1,0 +1,47 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Verify SDK release
+
+on: 
+  pull_request:
+  push:
+    branches:
+    - main
+    - github_actions_build
+    tags:
+      - 'v*'
+
+jobs:    
+  build_and_deploy:
+    name: Build and deploy
+    runs-on: macos-11
+
+    steps:
+      - name: Git checkout
+        uses: actions/checkout@v2
+      - name: Build Adaptive documentation
+        run: xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+      - name: Find Adaptive documentation path
+        id: find_adaptive
+        run: echo "::set-output name=docc_path::$(find ./docbuild -type d -iname 'Adaptive.doccarchive')"
+
+      - name: Update documentation branch
+        id: git_update
+        run: |
+          echo "${{ secrets.API_TOKEN_GITHUB }}" > ~/.ssh/github_key
+          git clone https://github.com/dylan-jb1/ibm-security-verify.github.io.git
+          cd ibm-security-verify.github.io
+          git checkout ios_sdk_test
+          cd ..
+          cp -R "${{ steps.find_adaptive.outputs.docc_path }}" ibm-security-verify.github.io/ios/adaptive/docs
+          cd ibm-security-verify.github.io
+          git add .
+          git commit -m "Test commit"
+          git status
+          git config --get remote.origin.url
+          git remote set-url origin https://git@github.com/dylan-jb1/ibm-security-verify.github.io.git
+          git push origin
+          git config --get remote.origin.url
+
+
+
