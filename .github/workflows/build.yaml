@@ -32,7 +32,6 @@ jobs:
       - name: Update documentation branch
         id: git_update
         run: |
-          echo "${{ secrets.API_TOKEN_GITHUB }}" > ~/.ssh/github_key
           git clone https://github.com/dylan-jb1/ibm-security-verify.github.io.git
           cd ibm-security-verify.github.io
           git checkout ios_sdk_test
@@ -43,7 +42,7 @@ jobs:
           git commit -m "Test commit"
           git status
           git config --get remote.origin.url
-          git remote set-url origin https://git@github.com/dylan-jb1/ibm-security-verify.github.io.git
+          git remote set-url origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/dylan-jb1/ibm-security-verify.github.io.git
           git push origin
           git config --get remote.origin.url
 
