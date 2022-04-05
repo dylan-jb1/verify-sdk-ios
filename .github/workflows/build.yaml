@@ -29,7 +29,7 @@ jobs:
         run: |
           xcodebuild -list
           cd ./sdk/core
-          xcodebuild docbuild -scheme core -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          xcodebuild docbuild -scheme Core -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build Authentication documentation
         run: |
           xcodebuild -list
