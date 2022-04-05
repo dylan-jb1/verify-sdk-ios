@@ -27,7 +27,7 @@ jobs:
           xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Find Adaptive documentation path
         id: find_adaptive
-        run: echo "::set-output name=docc_path::$(find ./docbuild -type d -iname 'Adaptive.doccarchive')"
+        run: echo "::set-output name=docc_path::$(find ./sdk/adaptive/docs -type d -iname 'Adaptive.doccarchive')"
 
       - name: Update documentation branch
         id: git_update
