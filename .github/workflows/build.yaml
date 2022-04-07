@@ -59,6 +59,7 @@ jobs:
           cp -R "${{ steps.find_adaptive.outputs.docc_path }}" ibm-security-verify.github.io/ios/adaptive/docs
           cp -R "${{ steps.find_core.outputs.docc_path }}" ibm-security-verify.github.io/ios/core/docs
           cp -R "${{ steps.find_fido2.outputs.docc_path }}" ibm-security-verify.github.io/ios/fido2/docs
+          cp -R "${{ steps.find_authentication.outputs.docc_path }}" ibm-security-verify.github.io/ios/authentication/docs
           cd ibm-security-verify.github.io
           git add .
           git commit -m "Test commit"
