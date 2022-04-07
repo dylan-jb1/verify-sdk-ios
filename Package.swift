@@ -40,6 +40,7 @@ let package = Package(
             path: "sdk/fido2/Tests"),
         .target(
             name: "Adaptive",
+            dependencies: ["Core"],
             path: "sdk/adaptive/Sources",
             exclude: ["Info.plist"]),
         .testTarget(
