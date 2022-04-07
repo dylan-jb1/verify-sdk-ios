@@ -27,19 +27,23 @@ jobs:
           pwd
           ls
           xcodebuild -list
-          xcodebuild docbuild -scheme Adaptive -derivedDataPath ./sdk/adaptive/docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          cd ./sdk/adaptive
+          xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build Core documentation
         run: |
           xcodebuild -list
-          xcodebuild docbuild -scheme Core -derivedDataPath ./sdk/core/docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          cd ./sdk/core
+          xcodebuild docbuild -scheme Core -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build FIDO2 documentation
         run: |
           xcodebuild -list
-          xcodebuild docbuild -scheme FIDO2 -derivedDataPath ./sdk/fido2/docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          cd ./sdk/fido2
+          xcodebuild docbuild -scheme FIDO2 -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build Authentication documentation
         run: |
           xcodebuild -list
-          xcodebuild docbuild -scheme Authentication -derivedDataPath ./sdk/authentication/docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+          cd ./sdk/authentication
+          xcodebuild docbuild -scheme Authentication -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       
       - name: Find Adaptive documentation path
         id: find_adaptive
