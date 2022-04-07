@@ -35,6 +35,11 @@ jobs:
           xcodebuild -list
           cd ./sdk/fido2
           xcodebuild docbuild -scheme FIDO2 -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
+      - name: Build Authentication documentation
+        run: |
+          xcodebuild -list
+          cd ./sdk/authentication
+          xcodebuild docbuild -scheme Authentication -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       
       - name: Find Adaptive documentation path
         id: find_adaptive
