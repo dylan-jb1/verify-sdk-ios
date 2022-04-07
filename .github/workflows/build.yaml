@@ -24,6 +24,7 @@ jobs:
         run: xcodebuild -resolvePackageDependencies
       - name: Build Adaptive documentation
         run: |
+          xcodebuild -list
           xcodebuild docbuild -scheme Adaptive -derivedDataPath ./sdk/adaptive/docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
       - name: Build Core documentation
         run: |
