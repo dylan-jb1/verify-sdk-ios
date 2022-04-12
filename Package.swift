@@ -32,24 +32,25 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "FIDO2",
-            path: "sdk/fido2/Sources",
-            exclude: ["Info.plist"]),
+            path: "sdk/fido2/Sources"),
         .testTarget(
             name: "FIDO2 Tests",
             dependencies: ["FIDO2"],
-            path: "sdk/fido2/Tests"),
+            path: "sdk/fido2/Tests",
+            resources: [
+                .copy("Resources/")
+            ]),
         .target(
             name: "Adaptive",
-            path: "sdk/adaptive/Sources",
-            exclude: ["Info.plist"]),
+            path: "sdk/adaptive/Sources"),
         .testTarget(
             name: "Adaptive Tests",
             dependencies: ["Adaptive"],
-            path: "sdk/adaptive/Tests"),
+            path: "sdk/adaptive/Tests",
+            exclude: ["tas/"]),
         .target(
             name: "Core",
-            path: "sdk/core/Sources",
-            exclude: ["Info.plist"]),
+            path: "sdk/core/Sources"),
         .testTarget(
             name: "Core Tests",
             dependencies: ["Core"],
@@ -57,8 +58,7 @@ let package = Package(
         .target(
             name: "Authentication",
             dependencies: ["Core"],
-            path: "sdk/authentication/Sources",
-            exclude: ["Info.plist"]),
+            path: "sdk/authentication/Sources"),
         .testTarget(
             name: "Authentication Tests",
             dependencies: ["Authentication", "Core"],
