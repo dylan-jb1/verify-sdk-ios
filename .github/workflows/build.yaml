@@ -20,65 +20,17 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
-      - name: Resolve package dependencies
-        run: xcodebuild -resolvePackageDependencies
-      - name: Swift build
-        run: swift build -v -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios15.0-simulator"
-      - name: Build Adaptive documentation
+      - name: layout check
         run: |
           pwd
           ls
-          xcodebuild -list
-          cd ./sdk/adaptive
-          xcodebuild docbuild -scheme Adaptive -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
-      - name: Build Core documentation
-        run: |
-          xcodebuild -list
-          cd ./sdk/core
-          xcodebuild docbuild -scheme Core -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
-      - name: Build FIDO2 documentation
-        run: |
-          xcodebuild -list
-          cd ./sdk/fido2
-          xcodebuild docbuild -scheme FIDO2 -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
-      - name: Build Authentication documentation
-        run: |
-          xcodebuild -list
-          cd ./sdk/authentication
-          xcodebuild docbuild -scheme Authentication -derivedDataPath ./docs -destination 'platform=iOS Simulator,OS=latest,name=iPhone 13 Pro'
-      
-      - name: Find Adaptive documentation path
-        id: find_adaptive
-        run: echo "::set-output name=docc_path::$(find ./sdk/adaptive/docs -type d -iname 'Adaptive.doccarchive')"
-      - name: Find Authentication documentation path
-        id: find_authentication
-        run: echo "::set-output name=docc_path::$(find ./sdk/authentication/docs -type d -iname 'Authentication.doccarchive')"
-      - name: Find Core documentation path
-        id: find_core
-        run: echo "::set-output name=docc_path::$(find ./sdk/core/docs -type d -iname 'Core.doccarchive')"
-      - name: Find FIDO 2 documentation path
-        id: find_fido2
-        run: echo "::set-output name=docc_path::$(find ./sdk/fido2/docs -type d -iname 'FIDO2.doccarchive')"
 
-      - name: Update documentation branch
-        id: git_update
+      - name: Checkout tools repo
+        uses: actions/checkout@v2
+        with:
+          repository: apple/swift-docc
+          path: swift-docc
+      - name: layout check
         run: |
-          git clone https://github.com/dylan-jb1/ibm-security-verify.github.io.git
-          cd ibm-security-verify.github.io
-          git checkout ios_sdk_test
-          cd ..
-          cp -R "${{ steps.find_adaptive.outputs.docc_path }}" ibm-security-verify.github.io/ios/adaptive/docs
-          cp -R "${{ steps.find_core.outputs.docc_path }}" ibm-security-verify.github.io/ios/core/docs
-          cp -R "${{ steps.find_fido2.outputs.docc_path }}" ibm-security-verify.github.io/ios/fido2/docs
-          cp -R "${{ steps.find_authentication.outputs.docc_path }}" ibm-security-verify.github.io/ios/authentication/docs
-          cd ibm-security-verify.github.io
-          git add .
-          git commit -m "Test commit"
-          git status
-          git config --get remote.origin.url
-          git remote set-url origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/dylan-jb1/ibm-security-verify.github.io.git
-          git push origin
-          git config --get remote.origin.url
-
-
-
+          pwd
+          ls
