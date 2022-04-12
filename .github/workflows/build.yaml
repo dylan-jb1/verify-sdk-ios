@@ -24,13 +24,12 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: apple/swift-docc
-          path: swift-docc
+          path: /Users/runner/work/verify-sdk-ios/swift-docc
 
       - name: Generate Symbol Graphs
         run: |
           pwd
           ls
-          cd verify-sdk-ios
           mkdir -p .build/symbol-graphs && \
           swift build \
             -Xswiftc -emit-symbol-graph \
