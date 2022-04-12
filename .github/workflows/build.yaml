@@ -93,6 +93,10 @@ jobs:
           cd ibm-security-verify.github.io
           git checkout ios_sdk_test
           cd ..
+          mkdir ibm-security-verify.github.io/ios/adaptive/docs
+          mkdir ibm-security-verify.github.io/ios/core/docs
+          mkdir ibm-security-verify.github.io/ios/fido2/docs
+          mkdir ibm-security-verify.github.io/ios/authentication/docs
           cp -R ./.build/Adaptive.docc ibm-security-verify.github.io/ios/adaptive/docs
           cp -R ./.build/Core.docc ibm-security-verify.github.io/ios/core/docs
           cp -R ./.build/FIDO2.docc ibm-security-verify.github.io/ios/fido2/docs
