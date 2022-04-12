@@ -24,7 +24,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: apple/swift-docc
-          path: /Users/runner/work/verify-sdk-ios/swift-docc
+          path: swift-docc
 
       - name: Generate Symbol Graphs
         run: |
@@ -51,37 +51,37 @@ jobs:
         run: |
           pwd
           ls
-          cd ../swift-docc
+          cd swift-docc
           swift build
 
-          mkdir ../verify-sdk-ios/.build/Adaptive.docc
-          mkdir ../verify-sdk-ios/.build/Core.docc
-          mkdir ../verify-sdk-ios/.build/FIDO2.docc
-          mkdir ../verify-sdk-ios/.build/Authentication.docc
+          mkdir ../.build/Adaptive.docc
+          mkdir ../.build/Core.docc
+          mkdir ../.build/FIDO2.docc
+          mkdir ../.build/Authentication.docc
 
-          swift run docc convert ../verify-sdk-ios/.build/Core.docc \
+          swift run docc convert ../.build/Core.docc \
             --fallback-display-name Core \
             --fallback-bundle-identifier com.ibm.Core \
             --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../verify-sdk-ios/.build/core-symbol-graphs
+            --additional-symbol-graph-dir ../.build/core-symbol-graphs
 
-          swift run docc convert ../verify-sdk-ios/.build/Adaptive.docc \
+          swift run docc convert ../.build/Adaptive.docc \
             --fallback-display-name Adaptive \
             --fallback-bundle-identifier com.ibm.Adaptive \
             --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../verify-sdk-ios/.build/adaptive-symbol-graphs
+            --additional-symbol-graph-dir ../.build/adaptive-symbol-graphs
 
-          swift run docc convert ../verify-sdk-ios/.build/Authentication.docc \
+          swift run docc convert ../.build/Authentication.docc \
             --fallback-display-name Authentication \
             --fallback-bundle-identifier com.ibm.Authentication \
             --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../verify-sdk-ios/.build/authentication-symbol-graphs
+            --additional-symbol-graph-dir ../.build/authentication-symbol-graphs
 
-          swift run docc convert ../verify-sdk-ios/.build/FIDO2.docc \
+          swift run docc convert ../.build/FIDO2.docc \
             --fallback-display-name FIDO2 \
             --fallback-bundle-identifier com.ibm.FIDO2 \
             --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../verify-sdk-ios/.build/fido2-symbol-graphs
+            --additional-symbol-graph-dir ../.build/fido2-symbol-graphs
 
       - name: Push to I/O repo
         run: |
@@ -89,10 +89,10 @@ jobs:
           cd ibm-security-verify.github.io
           git checkout ios_sdk_test
           cd ..
-          cp -R ../verify-sdk-ios/.build/Adaptive.docc ibm-security-verify.github.io/ios/adaptive/docs
-          cp -R ../verify-sdk-ios/.build/Core.docc ibm-security-verify.github.io/ios/core/docs
-          cp -R ../verify-sdk-ios/.build/FIDO2.docc ibm-security-verify.github.io/ios/fido2/docs
-          cp -R ../verify-sdk-ios/.build/Authentication.docc ibm-security-verify.github.io/ios/authentication/docs
+          cp -R ../.build/Adaptive.docc ibm-security-verify.github.io/ios/adaptive/docs
+          cp -R ../.build/Core.docc ibm-security-verify.github.io/ios/core/docs
+          cp -R ../.build/FIDO2.docc ibm-security-verify.github.io/ios/fido2/docs
+          cp -R ../.build/Authentication.docc ibm-security-verify.github.io/ios/authentication/docs
           cd ibm-security-verify.github.io
           git add .
           git commit -m "Test commit"
