@@ -20,7 +20,6 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
-        run: cd ..
       - name: Checkout tools repo
         uses: actions/checkout@v2
         with:
