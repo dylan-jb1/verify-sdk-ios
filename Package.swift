@@ -37,9 +37,7 @@ let package = Package(
             name: "FIDO2 Tests",
             dependencies: ["FIDO2"],
             path: "sdk/fido2/Tests",
-            resources: [
-                .copy("Resources/")
-            ]),
+            exclude: ["Resources/"]),
         .target(
             name: "Adaptive",
             path: "sdk/adaptive/Sources"),

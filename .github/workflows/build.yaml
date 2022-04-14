@@ -97,10 +97,10 @@ jobs:
           mkdir -p ibm-security-verify.github.io/ios/core/docs
           mkdir -p ibm-security-verify.github.io/ios/fido2/docs
           mkdir -p ibm-security-verify.github.io/ios/authentication/docs
-          cp -R ./.build/Adaptive.docc ibm-security-verify.github.io/ios/adaptive/docs
-          cp -R ./.build/Core.docc ibm-security-verify.github.io/ios/core/docs
-          cp -R ./.build/FIDO2.docc ibm-security-verify.github.io/ios/fido2/docs
-          cp -R ./.build/Authentication.docc ibm-security-verify.github.io/ios/authentication/docs
+          cp -R ./.build/Adaptive.docc/.docc-build/. ibm-security-verify.github.io/ios/adaptive/docs
+          cp -R ./.build/Core.docc/.docc-build/. ibm-security-verify.github.io/ios/core/docs
+          cp -R ./.build/FIDO2.docc/.docc-build/. ibm-security-verify.github.io/ios/fido2/docs
+          cp -R ./.build/Authentication.docc/.docc-build/. ibm-security-verify.github.io/ios/authentication/docs
           cd ibm-security-verify.github.io
           git add .
           git commit -m "Test commit"
