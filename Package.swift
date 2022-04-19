@@ -1,4 +1,4 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.6
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -37,7 +37,14 @@ let package = Package(
             name: "FIDO2 Tests",
             dependencies: ["FIDO2"],
             path: "Tests/FIDO2Tests",
-            exclude: ["Resources/"]),
+            resources: [
+                .copy("JSONFiles")
+            ],
+            linkerSettings: [
+              .linkedFramework(
+                "XCTest",
+                .when(platforms: [.iOS])),
+            ]),
         .target(
             name: "Adaptive",
             path: "Sources/adaptive"),
@@ -45,14 +52,24 @@ let package = Package(
             name: "Adaptive Tests",
             dependencies: ["Adaptive"],
             path: "Tests/AdaptiveTests",
-            exclude: ["tas/"]),
+            exclude: ["tas/"],
+            linkerSettings: [
+              .linkedFramework(
+                "XCTest",
+                .when(platforms: [.iOS])),
+            ]),
         .target(
             name: "Core",
             path: "Sources/core"),
         .testTarget(
             name: "Core Tests",
             dependencies: ["Core"],
-            path: "Tests/CoreTests"),
+            path: "Tests/CoreTests",
+            linkerSettings: [
+              .linkedFramework(
+                "XCTest",
+                .when(platforms: [.iOS])),
+            ]),
         .target(
             name: "Authentication",
             dependencies: ["Core"],
@@ -60,6 +77,11 @@ let package = Package(
         .testTarget(
             name: "Authentication Tests",
             dependencies: ["Authentication", "Core"],
-            path: "Tests/AuthenticationTests"),
+            path: "Tests/AuthenticationTests",
+            linkerSettings: [
+              .linkedFramework(
+                "XCTest",
+                .when(platforms: [.iOS])),
+            ]),
     ]
 )

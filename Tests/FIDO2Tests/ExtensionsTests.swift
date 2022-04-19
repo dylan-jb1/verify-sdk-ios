@@ -4,6 +4,7 @@
 
 import XCTest
 import CryptoKit
+@testable import FIDO2
 
 class ExtensionsTests: XCTestCase {
 

@@ -38,7 +38,7 @@ public struct UserDefault<T> {
     public init(key: String, value: T) {
         self.key = key
         self.value = value
-        UserDefaults.standard.register(defaults: [key: value])
+        UserDefaults.standard.set(value, forKey: key)
     }
     
     /// The value stored in `UserDefaults`.

@@ -11,7 +11,7 @@ class AdaptiveContextTests: XCTestCase {
     }
 
     override func tearDown() {
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     }
     
@@ -19,7 +19,7 @@ class AdaptiveContextTests: XCTestCase {
     /// This test invokes the collection of device information.
     func testStartCollection() {
         do {
-            AdaptiveContext.shared.collectionService = trusteerCollection
+            AdaptiveContext.shared.collectionService = mockCollectionService
             try AdaptiveContext.shared.start()
              XCTAssertTrue(true)
         }
@@ -32,7 +32,7 @@ class AdaptiveContextTests: XCTestCase {
     /// This test stops the collection of device information.
     func testStopCollection() {
         do {
-            AdaptiveContext.shared.collectionService = trusteerCollection
+            AdaptiveContext.shared.collectionService = mockCollectionService
             try AdaptiveContext.shared.stop()
             XCTAssertTrue(true)
         }

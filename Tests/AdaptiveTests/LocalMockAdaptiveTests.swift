@@ -11,7 +11,7 @@ class LocalMockAdaptiveTests: XCTestCase {
     override func tearDown() {
         requiresResult = nil
        
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     }
     
@@ -134,7 +134,7 @@ class LocalMockAdaptiveTests: XCTestCase {
     
     /// This test invokes the evaluation func.
     func testEvaluationRequiresAllowed() {
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
         
         let sessionId = AdaptiveContext.shared.sessionId
@@ -163,7 +163,7 @@ class LocalMockAdaptiveTests: XCTestCase {
     
     /// This test invokes the evaluation func.
     func testEvaluationRequiresEnrolled() {
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     
         let sessionId = AdaptiveContext.shared.sessionId

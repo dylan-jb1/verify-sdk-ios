@@ -5,6 +5,11 @@
 import XCTest
 @testable import FIDO2
 
+//extension Bundle {
+//    /// The bundle associated with the current Swift module.
+//    static let module: Bundle = Bundle(for: type(of: self))
+//}
+
 class PublicKeyCredentialCreationOptionsTests: XCTestCase {
 
     override func setUpWithError() throws {
@@ -17,8 +22,7 @@ class PublicKeyCredentialCreationOptionsTests: XCTestCase {
 
     func testCreateFromISVAFile() throws {
         // Given
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "ISVA.Attestation.Options", withExtension: "json") else {
+        guard let url = Bundle.module.url(forResource: "ISVA.Attestation.Options", withExtension: "json", subdirectory: "JSONFiles") else {
             XCTFail("Missing file: ISVA.Attestation.Options.json")
             return
         }
@@ -28,7 +32,7 @@ class PublicKeyCredentialCreationOptionsTests: XCTestCase {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
             let result = try decoder.decode(PublicKeyCredentialCreationOptions.self, from: data)
-            
+
             // Then
             XCTAssertNotNil(result)
         }
@@ -40,8 +44,7 @@ class PublicKeyCredentialCreationOptionsTests: XCTestCase {
     
     func testCreateFromISVFile() throws {
         // Given
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "ISV.Attestation.Options", withExtension: "json") else {
+        guard let url = Bundle.module.url(forResource: "ISV.Attestation.Options", withExtension: "json", subdirectory: "JSONFiles") else {
             XCTFail("Missing file: ISVA.Attestation.Options.json")
             return
         }

@@ -7,7 +7,7 @@ import XCTest
 
 class RemoteMockAdaptiveTests: XCTestCase {
     override func tearDown() {
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.stop()
     }
     
@@ -18,7 +18,7 @@ class RemoteMockAdaptiveTests: XCTestCase {
         // Create an expectation for a background download task.
         let expectation = XCTestExpectation(description: "Perform adaptive assessment on remote proxy.")
 
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     
         let sessionId = AdaptiveContext.shared.sessionId
@@ -52,7 +52,7 @@ class RemoteMockAdaptiveTests: XCTestCase {
         // Create an expectation for a background download task.
         let expectation = XCTestExpectation(description: "Perform adaptive assessment on remote proxy.")
 
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     
         let sessionId = AdaptiveContext.shared.sessionId
@@ -93,7 +93,7 @@ class RemoteMockAdaptiveTests: XCTestCase {
         // Create an expectation for a background download task.
         let expectation1 = XCTestExpectation(description: "Perform adaptive assessment on remote proxy.")
 
-        AdaptiveContext.shared.collectionService = trusteerCollection
+        AdaptiveContext.shared.collectionService = mockCollectionService
         try? AdaptiveContext.shared.start()
     
         var evaluation: FactorEvaluation?

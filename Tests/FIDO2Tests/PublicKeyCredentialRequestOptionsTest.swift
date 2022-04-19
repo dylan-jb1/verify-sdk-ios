@@ -17,8 +17,7 @@ class PublicKeyCredentialRequestOptionsTest: XCTestCase {
 
     func testCreateFromISVAFile() throws {
         // Given
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "ISVA.Assertion.Options", withExtension: "json") else {
+        guard let url = Bundle.module.url(forResource: "ISVA.Assertion.Options", withExtension: "json", subdirectory: "JSONFiles") else {
             XCTFail("Missing file: ISVA.Assertion.Options.json")
             return
         }
@@ -40,8 +39,7 @@ class PublicKeyCredentialRequestOptionsTest: XCTestCase {
     
     func testCreateFromISVFile() throws {
         // Given
-        let bundle = Bundle(for: type(of: self))
-        guard let url = bundle.url(forResource: "ISV.Assertion.Options", withExtension: "json") else {
+        guard let url = Bundle.module.url(forResource: "ISVA.Assertion.Options", withExtension: "json", subdirectory: "JSONFiles") else {
             XCTFail("Missing file: ISV.Assertion.Options.json")
             return
         }

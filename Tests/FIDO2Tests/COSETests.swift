@@ -3,6 +3,7 @@
 //
 
 import XCTest
+@testable import FIDO2
 
 class COSETests: XCTestCase {
     override func setUpWithError() throws {

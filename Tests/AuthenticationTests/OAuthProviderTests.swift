@@ -9,11 +9,11 @@ import Foundation
 
 class OAuthProviderTest: XCTestCase {
     // TODO: Replace these credential parameters with valid values.
-    let clientId = ""
+    let clientId = "38cdeff8-9693-4f0b-99c9-563d5c20d6a7"
     let clientSecret = ""
-    let username = ""
-    let password = ""
-    let urlBase = "https:sdk.verify.ibm.com/v1.0/endpoint/default"
+    let username = "testuser"
+    let password = "Passw0rd"
+    let urlBase = "https://sdk.verify.ibm.com/v1.0/endpoint/default"
     
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
