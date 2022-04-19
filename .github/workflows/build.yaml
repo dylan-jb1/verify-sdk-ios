@@ -63,9 +63,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/core-symbol-graphs
 
-          swift run docc process-archive \ 
-            transform-for-static-hosting \
-            ../.build/Core.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting ../.build/Core.docc/.docc-build
 
           swift run docc convert ../.build/Adaptive.docc \
             --fallback-display-name Adaptive \
@@ -73,9 +71,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/adaptive-symbol-graphs
 
-          swift run docc process-archive \
-            transform-for-static-hosting \
-            ../.build/Adaptive.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting ../.build/Adaptive.docc/.docc-build
 
           swift run docc convert ../.build/Authentication.docc \
             --fallback-display-name Authentication \
@@ -83,9 +79,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/authentication-symbol-graphs
 
-          swift run docc process-archive \
-            transform-for-static-hosting \
-            ../.build/Authentication.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting ../.build/Authentication.docc/.docc-build
 
           swift run docc convert ../.build/FIDO2.docc \
             --fallback-display-name FIDO2 \
@@ -93,9 +87,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/fido2-symbol-graphs
 
-          swift run docc process-archive \
-            transform-for-static-hosting \
-            ../.build/FIDO2.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting ../.build/FIDO2.docc/.docc-build
 
       - name: Push to I/O repo
         run: |
