@@ -73,7 +73,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/adaptive-symbol-graphs
 
-          swift run docc process-archive \ 
+          swift run docc process-archive \
             transform-for-static-hosting \
             ../.build/Adaptive.docc/.docc-build
 
@@ -83,7 +83,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/authentication-symbol-graphs
 
-          swift run docc process-archive \ 
+          swift run docc process-archive \
             transform-for-static-hosting \
             ../.build/Authentication.docc/.docc-build
 
@@ -93,7 +93,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/fido2-symbol-graphs
 
-          swift run docc process-archive \ 
+          swift run docc process-archive \
             transform-for-static-hosting \
             ../.build/FIDO2.docc/.docc-build
 
