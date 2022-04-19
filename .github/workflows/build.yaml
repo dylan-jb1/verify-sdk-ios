@@ -28,8 +28,6 @@ jobs:
 
       - name: Generate Symbol Graphs
         run: |
-          pwd
-          ls
           mkdir -p .build/symbol-graphs && \
           swift build \
             -Xswiftc -emit-symbol-graph \
@@ -37,8 +35,6 @@ jobs:
             -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios15.0-simulator"
       - name: Move Symbol Graphs
         run: |
-          pwd
-          ls
           mkdir .build/core-symbol-graphs \
           && mv .build/symbol-graphs/Core* .build/core-symbol-graphs
           mkdir .build/authentication-symbol-graphs \
@@ -49,8 +45,6 @@ jobs:
           && mv .build/symbol-graphs/FIDO2* .build/fido2-symbol-graphs
       - name: Generate docc
         run: |
-          pwd
-          ls
           cd swift-docc
           swift build
 
@@ -69,11 +63,19 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/core-symbol-graphs
 
+          swift run docc process-archive \ 
+            transform-for-static-hosting \
+            ../.build/Core.docc/.docc-build
+
           swift run docc convert ../.build/Adaptive.docc \
             --fallback-display-name Adaptive \
             --fallback-bundle-identifier com.ibm.Adaptive \
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/adaptive-symbol-graphs
+
+          swift run docc process-archive \ 
+            transform-for-static-hosting \
+            ../.build/Adaptive.docc/.docc-build
 
           swift run docc convert ../.build/Authentication.docc \
             --fallback-display-name Authentication \
@@ -81,11 +83,19 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/authentication-symbol-graphs
 
+          swift run docc process-archive \ 
+            transform-for-static-hosting \
+            ../.build/Authentication.docc/.docc-build
+
           swift run docc convert ../.build/FIDO2.docc \
             --fallback-display-name FIDO2 \
             --fallback-bundle-identifier com.ibm.FIDO2 \
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/fido2-symbol-graphs
+
+          swift run docc process-archive \ 
+            transform-for-static-hosting \
+            ../.build/FIDO2.docc/.docc-build
 
       - name: Push to I/O repo
         run: |
