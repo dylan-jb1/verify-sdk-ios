@@ -33,61 +33,23 @@ jobs:
             -Xswiftc -emit-symbol-graph \
             -Xswiftc -emit-symbol-graph-dir -Xswiftc .build/symbol-graphs \
             -Xswiftc "-sdk" -Xswiftc "`xcrun --sdk iphonesimulator --show-sdk-path`" -Xswiftc "-target" -Xswiftc "x86_64-apple-ios15.0-simulator"
-      - name: Move Symbol Graphs
-        run: |
-          mkdir .build/core-symbol-graphs \
-          && mv .build/symbol-graphs/Core* .build/core-symbol-graphs
-          mkdir .build/authentication-symbol-graphs \
-          && mv .build/symbol-graphs/Authentication* .build/authentication-symbol-graphs
-          mkdir .build/adaptive-symbol-graphs \
-          && mv .build/symbol-graphs/Adaptive* .build/adaptive-symbol-graphs
-          mkdir .build/fido2-symbol-graphs \
-          && mv .build/symbol-graphs/FIDO2* .build/fido2-symbol-graphs
       - name: Generate docc
         run: |
           cd swift-docc
           swift build
 
-          mkdir ../.build/Adaptive.docc
-          mkdir ../.build/Core.docc
-          mkdir ../.build/FIDO2.docc
-          mkdir ../.build/Authentication.docc
+          mkdir ../.build/iOS-SDK.docc
 
           git clone https://github.com/apple/swift-docc-render-artifact.git
           export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
 
-
-          swift run docc convert ../.build/Core.docc \
-            --fallback-display-name Core \
-            --fallback-bundle-identifier com.ibm.Core \
+          swift run docc convert ../.build/iOS-SDK.docc \
+            --fallback-display-name iOS-SDK \
+            --fallback-bundle-identifier com.ibm.iOS-SDK \
             --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../.build/core-symbol-graphs
+            --additional-symbol-graph-dir ../.build/symbol-graphs
 
-          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/core/docs/ ../.build/Core.docc/.docc-build
-
-          swift run docc convert ../.build/Adaptive.docc \
-            --fallback-display-name Adaptive \
-            --fallback-bundle-identifier com.ibm.Adaptive \
-            --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../.build/adaptive-symbol-graphs
-
-          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/adaptive/docs/ ../.build/Adaptive.docc/.docc-build
-
-          swift run docc convert ../.build/Authentication.docc \
-            --fallback-display-name Authentication \
-            --fallback-bundle-identifier com.ibm.Authentication \
-            --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../.build/authentication-symbol-graphs
-
-          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/authentication/docs/ ../.build/Authentication.docc/.docc-build
-
-          swift run docc convert ../.build/FIDO2.docc \
-            --fallback-display-name FIDO2 \
-            --fallback-bundle-identifier com.ibm.FIDO2 \
-            --fallback-bundle-version 1.0.0 \
-            --additional-symbol-graph-dir ../.build/fido2-symbol-graphs
-
-          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/fido2/docs/ ../.build/FIDO2.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/ ../.build/iOS-SDK.docc/.docc-build
 
       - name: Push to I/O repo
         run: |
@@ -95,14 +57,8 @@ jobs:
           cd ibm-security-verify.github.io
           git checkout ios_sdk_test
           cd ..
-          mkdir -p ibm-security-verify.github.io/ios/adaptive/docs
-          mkdir -p ibm-security-verify.github.io/ios/core/docs
-          mkdir -p ibm-security-verify.github.io/ios/fido2/docs
-          mkdir -p ibm-security-verify.github.io/ios/authentication/docs
-          cp -R ./.build/Adaptive.docc/.docc-build/. ibm-security-verify.github.io/ios/adaptive/docs
-          cp -R ./.build/Core.docc/.docc-build/. ibm-security-verify.github.io/ios/core/docs
-          cp -R ./.build/FIDO2.docc/.docc-build/. ibm-security-verify.github.io/ios/fido2/docs
-          cp -R ./.build/Authentication.docc/.docc-build/. ibm-security-verify.github.io/ios/authentication/docs
+          mkdir -p ibm-security-verify.github.io/ios/
+          cp -R ./.build/iOS-SDK.docc/.docc-build/. ibm-security-verify.github.io/ios
           cd ibm-security-verify.github.io
           git add .
           git commit -m "Test commit"

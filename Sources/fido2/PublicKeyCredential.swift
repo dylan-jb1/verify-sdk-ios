@@ -437,11 +437,13 @@ public enum AuthenticatorTransport: String, Codable {
 /// An enumeration that describes an authenticators' attachment modalities. Relying parties use this to express a preferred authenticator attachment modality.
 public enum AuthenticatorAttachment: String, Codable {
     /// A platform authenticator is attached using a client device-specific transport, called platform attachment, and is usually not removable from the client device.
-    /// - remark: A public key credential bound to a platform authenticator is called a platform credential.
+    ///
+    /// A public key credential bound to a platform authenticator is called a platform credential.
     case platform
     
     /// A cross-platform attachment are removable authenticator from, and can "roam" between, client devices.
-    /// - remark: A public key credential bound to a roaming authenticator is called a roaming credential.
+    ///
+    /// A public key credential bound to a roaming authenticator is called a roaming credential.
     case crossPlatform = "cross-platform"
 }
 
