@@ -52,7 +52,6 @@ public enum PublicKeyCredentialError: Error, LocalizedError, Equatable {
 }
 
 /// Platform authentication for providing public key credential requests to an app using the [W3C Web Authentication](https://www.w3.org/TR/webauthn-2/) specification.
-@available(iOSApplicationExtension, unavailable)
 public class PublicKeyCredentialProvider {
     /// Create the object.
     public init() {
@@ -182,7 +181,6 @@ public class PublicKeyCredentialProvider {
     /// provider.delegate = self
     /// provider.createCredentialAssertionRequest(options: options)
     /// ```
-    @available(iOSApplicationExtension, unavailable)
     public func createCredentialAssertionRequest(options: PublicKeyCredentialRequestOptions, clientDataParams: [String:Any]? = [:]) {
         // Check if we have any extensions and if so, check if the biometry is Touch ID and if so, create an LAContext using extension message as the localized reason.
         var context: LAContext? = nil

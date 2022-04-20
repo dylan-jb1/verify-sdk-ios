@@ -57,6 +57,7 @@ jobs:
           cd ibm-security-verify.github.io
           git checkout ios_sdk_test
           cd ..
+          rm -r ibm-security-verify.github.io/ios/*
           mkdir -p ibm-security-verify.github.io/ios/
           cp -R ./.build/iOS-SDK.docc/.docc-build/. ibm-security-verify.github.io/ios
           cd ibm-security-verify.github.io
