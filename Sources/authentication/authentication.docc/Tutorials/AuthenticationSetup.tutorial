@@ -1,0 +1,51 @@
+@Tutorial(time: 10) {
+    @Intro(title: "Getting started with Authentication") {
+        This tutorial guides you through creating an app that utilises the _Authentication_ SDK to provide authentication through IBM for users of your app.
+        
+        @Image(source: eye-bee-m.jpeg, alt: "The IBM Logo")
+    }
+    
+    @Section(title: "Create a new project and add the Authentication SDK") {
+        @ContentAndMedia {
+            Create and configure an Xcode project that uses the Verify SDK Authentication package.
+        }
+        
+        @Steps {
+            @Step {
+                Open XCode and create a new project using the iOS App template.
+
+                @Image(source: step_2_iOS_template.png, alt: "A screenshot of the new application pop-up on XCode, highlighting the 'App' and the 'Next' buttons.")
+            }
+            
+            @Step {
+                Enter "Auth Test" as the Product Name.
+                
+                @Image(source: step_3_name_project.png, alt: "A screenshot of the configuration screen when creating a new project, with the name box highlighted with text that says 'Auth Test'")
+            }
+            
+            @Step {
+                Select "SwiftUI" from the Interface pop-up menu and "Swift" from the language drop-down, then click Next. Save the project somewhere on your device.
+                
+                @Image(source: step_4_swift_ui.png, alt: "A screenshot of the configuration screen of a new project, with the 'Interface' and the 'language' highlighted and set to 'SwiftUI' & 'Swift' respectively")
+            }
+            
+            @Step {
+                In your project, go to File -> Add Packages...
+                
+                @Image (source: step_5_add_package.png, alt: "A screenshot of the xcode window with the 'File' menu bar highlighted, as well as the 'Add Packages...' item in that menu selected.")
+            }
+
+            @Step {
+                Enter `https://github.com/ibm-security-verify/verify-sdk-ios.git` in the input in the top right, and select "Add Package."
+                
+                @Image(source: step_6_find_package.png, alt: "A screenshot of the package menu with the search bar highlighted, input with the text 'https://github.com/ibm-security-verify/verify-sdk-ios.git', and the 'Add Package' button highlighted.")
+            }
+
+            @Step {
+                Select "Authentication" from the checklist menu, and then press "Add Package."
+                
+                @Image(source: step_7_authentication_check.png, alt: "A screenshot of the 'Add Package' pop-up menu with the Authentication SDK ticked in the package select screen.")
+            }
+        }
+    }
+}

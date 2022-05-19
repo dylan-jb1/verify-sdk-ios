@@ -1,0 +1,12 @@
+@Tutorials(name: "AuthenticationSDK") {
+    @Intro(title: "Getting started with Authentication") {
+        Verify the identity of users of your app via the IBM Verify Authentication SDK.
+        
+    }
+    
+    @Chapter(name: "Authentication Essentials") {
+        Create a new app that utilises the Authentication SDK.
+        
+        @TutorialReference(tutorial: "doc:AuthenticationSetup")
+    }
+}
