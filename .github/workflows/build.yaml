@@ -17,7 +17,7 @@ jobs:
     name: Build and deploy
     runs-on: macos-11
     outputs:
-      trigger_hash: ${{GITHUB_SHA}}
+      trigger_hash: ${{github.sha}}
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
