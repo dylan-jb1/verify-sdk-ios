@@ -16,6 +16,8 @@ jobs:
   build_and_deploy:
     name: Build and deploy
     runs-on: macos-11
+    outputs:
+      trigger_hash: ${{GITHUB_SHA}}
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
@@ -78,9 +80,9 @@ jobs:
         run: |
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
           echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
-          echo -n 'Files changed: '  >> $GITHUB_STEP_SUMMARY
-          git show HEAD --name-only --format=tformat: | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
+          echo -n 'Count: '  >> $GITHUB_STEP_SUMMARY
+          git show ${{jobs.build_and_deploy.outputs.trigger_hash}} --name-only --format=tformat: | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          git show HEAD --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
+          git show ${{jobs.build_and_deploy.outputs.trigger_hash}} --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         
