@@ -79,8 +79,8 @@ jobs:
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
           echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
           echo -n 'Files changed: '
-          git show --name-only --format=tformat: | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
+          git show HEAD^..HEAD --name-only --format=tformat: | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          git show --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
+          git show HEAD^..HEAD --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         
