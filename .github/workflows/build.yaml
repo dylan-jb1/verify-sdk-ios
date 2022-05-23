@@ -73,5 +73,12 @@ jobs:
     needs: build_and_deploy
     steps:
       - name: Adding markdown
-        run: echo '### Hello world! :rocket:' >> $GITHUB_STEP_SUMMARY
+        run: |
+          echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
+          echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
+          echo -n 'Files changed: '
+          git show --name-only --format=tformat: | wc -l >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
+          git show --name-only --format=tformat: >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY
         
