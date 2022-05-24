@@ -82,8 +82,8 @@ jobs:
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
           echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
           echo -n 'Count: '  >> $GITHUB_STEP_SUMMARY
-          git diff --name-only ${{needs.build_and_deploy.outputs.event_before}} | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD^ | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          git diff --name-only ${{needs.build_and_deploy.outputs.event_before}} >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD^ >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         
