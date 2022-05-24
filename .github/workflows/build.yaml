@@ -45,10 +45,10 @@ jobs:
           git clone https://github.com/apple/swift-docc-render-artifact.git
           export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
 
-          cp ../Sources/adaptive/adaptive.docc/* ../.build/iOS-SDK.docc/ || true
-          cp ../Sources/authentication/authentication.docc/* ../.build/iOS-SDK.docc/ || true
-          cp ../Sources/core/core.docc/* ../.build/iOS-SDK.docc/ || true
-          cp ../Sources/fido2/fido2.docc/* ../.build/iOS-SDK.docc/ || true
+          cp -a ../Sources/adaptive/adaptive.docc/. ../.build/iOS-SDK.docc/ || true
+          cp -a ../Sources/authentication/authentication.docc/. ../.build/iOS-SDK.docc/ || true
+          cp -a ../Sources/core/core.docc/. ../.build/iOS-SDK.docc/ || true
+          cp -a ../Sources/fido2/fido2.docc/. ../.build/iOS-SDK.docc/ || true
 
           swift run docc convert ../.build/iOS-SDK.docc \
             --fallback-display-name iOS-SDK \
