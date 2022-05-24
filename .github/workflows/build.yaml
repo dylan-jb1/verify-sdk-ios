@@ -82,10 +82,12 @@ jobs:
       - name: Add markdown
         run: |
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
+          echo '### Documentation' >> $GITHUB_STEP_SUMMARY
+          echo 'Documentation hosted at: ```https://dylan-jb1.github.io/ibm-security-verify.github.io/```' >> $GITHUB_STEP_SUMMARY
           echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
           echo -n 'Count: '  >> $GITHUB_STEP_SUMMARY
-          git diff --name-only HEAD^ | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD~ | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-          git diff --name-only HEAD^ >> $GITHUB_STEP_SUMMARY
+          git diff --name-only HEAD~ >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
         
