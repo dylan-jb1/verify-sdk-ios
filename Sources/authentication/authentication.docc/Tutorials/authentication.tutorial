@@ -4,9 +4,15 @@
         
     }
     
-    @Chapter(name: "Authentication Essentials") {
-        Create a new app that utilises the Authentication SDK.
+    @Chapter(name: "Authentication Setup") {
+        Add the Authentication SDK package to your project.
         
         @TutorialReference(tutorial: "doc:AuthenticationSetup")
+    }
+
+    @Chapter(name: "Authentication Basics") {
+        Get started using the Authentication SDK.
+
+        @TutorialReference(tutorial: "doc:AuthenticationBasics")
     }
 }

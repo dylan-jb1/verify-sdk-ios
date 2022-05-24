@@ -1,6 +1,6 @@
 @Tutorial(time: 10) {
     @Intro(title: "Getting started with Authentication") {
-        This tutorial guides you through creating an app that utilises the _Authentication_ SDK to provide authentication through IBM for users of your app.
+        This tutorial guides you through creating an app that utilises the _Authentication_ SDK.
         
         @Image(source: eye-bee-m.jpeg, alt: "The IBM Logo")
     }
