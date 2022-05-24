@@ -77,6 +77,8 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 3
       - name: Add markdown
         run: |
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
