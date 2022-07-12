@@ -1,0 +1,14 @@
+@Tutorials(name: "FIDO2 SDK") {
+    @Intro(title: "Getting started with FIDO2") {
+        Create an application that can utilise the power of the FIDO2 system to authenticate users via registered biometrics on their personal devices.
+        
+    }
+    
+    @Chapter(name: "FIDO2 Setup") {
+        @Image(source: eye-bee-m.png, alt: "The IBM logo.")
+        
+        Create an example application that can utilise the FIDO2 SDK to complete a verification.
+        
+        @TutorialReference(tutorial: "doc:FIDO2Setup")
+    }
+}

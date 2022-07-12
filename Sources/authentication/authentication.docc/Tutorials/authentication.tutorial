@@ -5,14 +5,10 @@
     }
     
     @Chapter(name: "Authentication Setup") {
-        Add the Authentication SDK package to your project.
+        @Image(source: eye-bee-m.jpg, alt: "The IBM logo.")
+        
+        Create an example application that can utilise the Authentication SDK to verify a user.
         
         @TutorialReference(tutorial: "doc:AuthenticationSetup")
-    }
-
-    @Chapter(name: "Authentication Basics") {
-        Get started using the Authentication SDK.
-
-        @TutorialReference(tutorial: "doc:AuthenticationBasics")
     }
 }

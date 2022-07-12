@@ -1,0 +1,355 @@
+@Tutorial(time: 40) {
+    @Intro(title: "Creating a FIDO2 Application") {
+        The following tutorial will guide you through the creation of a new application that uses the FIDO2 Assertion and Attestation ceremonies for user verification.
+        
+        @Image(source: eye-bee-m.jpeg, alt: "The IBM logo stylised as a an eye, a bee, and the letter m.")
+    }
+    
+    @Section(title: "Creating an app that uses the FIDO2 Package") {
+        @ContentAndMedia {
+            Create and configure an iOS Application that uses the Verify SDK FIDO2 package.
+        }
+        
+        @Steps {
+            @Step {
+                Open XCode and create a new project.
+                
+                @Image(source: step_1_new_project.png, alt: "The new project screen for XCode, with the 'New Project' button highlighted.")
+            }
+            @Step {
+                Select the iOS App template.
+
+                @Image(source: step_2_iOS_template.png, alt: "A screenshot of the new application pop-up on XCode, highlighting the 'App' and the 'Next' buttons.")
+            }
+            
+            @Step {
+                Enter your app name. For this tutorial, we will use the name FIDO2Tutorial.
+                
+                @Image(source: step_3_name_project.png, alt: "A screenshot of the configuration screen when creating a new project, with the name box highlighted with text that says 'FIDO2Tutorial'")
+            }
+            
+            @Step {
+                Select "Storyboard" from the Interface pop-up menu and "Swift" from the language drop-down, then click Next. Save the project somewhere on your device.
+                
+                @Image(source: step_4_swift_ui.png, alt: "A screenshot of the configuration screen of a new project, with the 'Interface' and the 'language' highlighted and set to 'Storyboard' & 'Swift' respectively")
+            }
+            
+            @Step {
+                In your project, go to File -> Add Packages...
+                
+                @Image (source: step_5_add_package.png, alt: "A screenshot of the xcode window with the 'File' menu bar highlighted, as well as the 'Add Packages...' item in that menu selected.")
+            }
+
+            @Step {
+                Enter `https://github.com/ibm-security-verify/verify-sdk-ios.git` in the input in the top right, and select "Add Package."
+                
+                @Image(source: step_6_find_package.png, alt: "A screenshot of the package menu with the search bar highlighted, input with the text 'https://github.com/ibm-security-verify/verify-sdk-ios.git', and the 'Add Package' button highlighted.")
+            }
+
+            @Step {
+                Select "FIDO2" from the checklist menu, and then press "Add Package."
+                
+                @Image(source: step_7_authentication_check.png, alt: "A screenshot of the 'Add Package' pop-up menu with the FIDO2 SDK ticked in the package select screen.")
+            }
+            
+            @Step {
+                Now that your App is created, you should have a directory with the name you typed in step 3, with the files `AppDelegate.swift`, `SceneDelegate.swift`, `ViewController.swift`, `Main.storyboard`, `LaunchScreen.storyboard`, and a directory called `Assets`.
+            }
+        }
+    }
+    
+    @Section(title: "Create helper & common files") {
+        @ContentAndMedia {
+            Create the helper files that share common values and protocols for the rest of the program.
+        }
+        
+        @Steps {
+            @Step {
+                The first step is to setup the UI. Your needs will likely vary from the UI created for this app. The `Main.storyboard` file for this tutorial will have the source code displayed here.
+                
+                @Code(file:Main.storyboard, name:"Main.storyboard")                
+            }
+            
+            @Step {
+                The first helper file we will create will be called `AppHelper.swift`
+                
+                @Code(file:AppHelper_1.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                We will create some constants that will help make future code more precise.
+                
+                @Code(file:AppHelper_2.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                We will create two enum descriptions that will appear a lot in the future. The first being store, which can be used to easily reference locally saved data for future use, and the second being a NetworkError enum for assistance in complex networking within functions.
+                
+                @Code(file:AppHelper_3.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                Two more helper functions will be created. The first one will be acceptableStatusCodes, which will return an array in the inclusive range 200-299, which is a list of all status codes that constitute a success. The second function is a createBottomBorder function which will assist with handling the UI elements of the application.
+                
+                @Code(file:AppHelper_4.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                The first of the extensions that will be added will be 3 to assist with the creation and manipulation of UI elements to serve the purposes of the application.
+                
+                @Code(file:AppHelper_5.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                The last changes to be made to `AppHelper.swift` will be the addition of two extensions to `Data` and to `Logger`. The Data extension will be a function that will return a Base-64 URL encoded string in the format required for the application. The `Logger` changes will be to assist with clarity when logging information for the application.
+                
+                @Code(file:AppHelper_6.swift, name:"AppHelper.swift")
+            }
+            
+            @Step {
+                The FIDO service uses certain methods and user credential data which we will provide support for to make it's integration easier. We will put this code in a new swift file called `CredentialUserData.swift`.
+                
+                @Code(file:CredentialUserData_1.swift, name:"CredentialUserData.swift")
+            }
+            
+            @Step {
+                The FIDO server returns many attributes that are related to a user, so we will create an enum that can store this information.
+                
+                @Code(file:CredentialUserData_2.swift, name:"CredentialUserData.swift")
+            }
+            
+            @Step {
+                The reponses for assertation and attestation will be of a certain type, so we will create protocols which match these response types, containing the necessary variables.
+                
+                @Code(file:CredentialUserData_3.swift, name:"CredentialUserData.swift")
+            }
+            
+            @Step {
+                The final addition to the `CredentialUserData.swift` file is the creation of structures to represent ISVAssertion and ISVAAssertion responses.
+                
+                @Code(file:CredentialUserData_4.swift, name:"CredentialUserData.swift")
+            }
+            
+            @Step {
+                The last helper file to be created will be called `IVCreds.swift`, and will contain structures and extensions to manage IV credential data.
+                
+                @Code(file:IVCreds_1.swift, name:"IVCreds.swift")
+            }
+            
+            @Step {
+                `IVCreds.swift` will contain a public struct that will represent the IV creds received from the reverse proxy. This will store the username along with any attributes.
+                
+                @Code(file:IVCreds_2.swift, name:"IVCreds.swift")
+            }
+            
+            @Step {
+                An extension of IVCreds will be created that will contain two functions, `buildURL`, which will construct an IVCreds URL from a given string, and getWhoAmI, which will give the return value from the whoAmI URL.
+                
+                @Code(file:IVCreds_3.swift, name:"IVCreds.swift")
+            }
+        }
+    }
+        
+    @Section(title:"Creating the FIDO functionality") {
+        @ContentAndMedia {
+            Create a file containing all of the functionality required to use the FIDO service.
+        }
+        
+        @Steps {
+            @Step {
+                Create a new file called `FidoService.swift`. This will contain the main functionality of the application and utilise the functions provided by the FIDO2 SDK.
+                
+                @Code(file:FidoService_1.swift, name:"FidoService.swift")
+            }
+            
+            @Step {
+                The first step in the FIDO2 process is the fetching of attestation options. We will write a function that takes in the relyingPartyURL, an access token, and some parameters, which will perform this functionality.
+                
+                @Code(file:FidoService_2.swift, name:"FidoService.swift")
+            }
+            
+            @Step {
+                The FIDO Service uses these options for the creation of an authenticator, which our program must be able to do. This can be done via a createAuthenticator function.
+                
+                @Code(file:FidoService_3.swift, name:"FidoService.swift")
+            }
+            
+            @Step {
+                To complete Assertation, the program must be aware of the available options. This can be achieved by using the Assertation specific functions of the FIDO2 SDK, which will be done via the implementation of a fetchAssertationOptions function.
+                
+                @Code(file:FidoService_4.swift, name:"FidoService.swift")
+            }
+            
+            @Step {
+                Now that we can get the assertation options, we need a way to make the assertation to the authenticator for validation.
+                
+                @Code(file:FidoService_5.swift, name:"FidoService.swift")
+            }
+        }
+    }
+        
+    @Section(title: "Create landing page and login screens") {
+        @ContentAndMedia {
+            Now that we have all the helpers and FIDO functionality in place, the last step is to connect it to our UI. We will create ViewControllers for the different pages of our application.
+        }
+        
+        @Steps {
+            @Step {
+                The first view controller to make will be the landing page. For this, we will make a new file called `LandingViewController.swift`. According to our `Main.storyboard`, this page will have 2 views on it each containing 1 button, which correspond to the ISV and ISVA configurations of FIDO. We define this view controller and set the appearances of the buttons. When the code is written, the IBOutlets should automatically connect to our storyboard UI elements.
+                
+                @Code(file:LandingViewController_1.swift, name:"LandingViewController.swift")
+            }
+            
+            @Step {
+                The Cloud Based ISVA deployment requires users to login to their tenants in order to register for FIDO. This will be handled on a login view controller which will be called `LoginViewController.swift`. This will log a user in and pass the data forward to the attestation view controller for registration.
+                
+                @Code(file:LoginViewController_1.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                The login view controller will use a number of variables to control on screen elements, which need to be defined. A function to manage the loading of onscreen elements when the screen is loaded will also be defined.
+                
+                @Code(file:LoginViewController_2.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                The prepare function for the LoginViewController will be overrided in order to set up the viewController to the state required.
+                
+                @Code(file:LoginViewController_3.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                The functionality of the login button will be added via a IBAction called onLoginm with the sender set to a UIButton. This will perform the login attempt against the tenant after performing validations on the input. This requires the tenant application to support resource owner password credential (ROPC) for authentication. A createRelyingParty function will also be created that will assist the functionality of the onLogin function.
+                
+                @Code(file:LoginViewController_4.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                In order to be able to perform the login, a login function will be created. This function is called by the onLogin IBAction defined in the previous step. This will use the username and password inputs in the text fields of the UI to perform authentication.
+                
+                @Code(file:LoginViewController_5.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                The final step for the `LoginViewController.swift` file is the addition of a function to complete the registration with FIDO, called fidoRegistration. This function is called in the onLogin function, and will begin the registration process after a successful login.
+                
+                @Code(file:LoginViewController_6.swift, name:"LoginViewController.swift")
+            }
+            
+            @Step {
+                An on-premise ISV deployment will require a different login page than a cloud based one. We will make a new file called `WhoAmIViewController.swift`, which will be able to support this. This will be far simpler than the LoginViewController. First step is to create a new file, with some basic code in it to store references to screen elements, and define constraints of the view.
+                
+                @Code(file:WhoAmIViewController_1.swift, name:"WhoAmIViewController.swift")
+            }
+            
+            @Step {
+                We now create a function called onWhoAmI, which will be triggered by a UI button. This will call the IVCreds getWhoAmI function using the supplied information.
+                
+                @Code(file:WhoAmIViewController_2.swift, name:"WhoAmIViewController.swift")
+            }
+        }
+    }
+    @Section(title:"Create UI for attestation and assertion functionality") {
+        @ContentAndMedia {
+            Creating pages to handle the actual implementation of the FIDO2 service, via the attestation and assertion ceremonies.
+        }
+        
+        @Steps {
+            @Step {
+                The next UI screen following both the WhoAmI & the Login view controllers is the AttestationViewController, which prompts a user to initiate the registration via input of a button press. We will create a new file called `AttestationViewController.swift`, and create some variables to represent screen elements.
+                
+                @Code(file:AttestationViewController_1.swift, name:"AttestationViewController.swift")
+            }
+            
+            @Step {
+                We create a set of variables to represent input parameters for attestation, which control values represented in on screen elements. We also create a prepare and viewDidLoad function to control the screen loading and how it should be handled. The prepare function shall set the values of the initialised variables.
+                
+                @Code(file:AttestationViewController_2.swift, name:"AttestationViewController.swift")
+            }
+            
+            @Step {
+                To complete the AttestationViewController, we need to add functionality to the 'Initiate Registration' button, in the form of an onOptionsClick function.
+                
+                @Code(file:AttestationViewController_3.swift, name:"AttestationViewController.swift")
+            }
+            
+            @Step {
+                Once a user has pressed the "Initiate Registration" button, the application will move onto the AttestationInfoViewController screen, where a user can input the nickname of their credential and confirm their registration. This will be the `AttestationInfoViewController.swift` page, and pressing the "Register" button will complete the FIDO regisration.
+                
+                @Code(file:AttestationInfoViewController_1.swift, name:"AttestationInfoViewController.swift")
+            }
+            
+            @Step {
+                The AttestationInfoViewController needs some variables to control the information needed for registration, as well as a function to set up the environment when the view loads.
+                
+                @Code(file:AttestationInfoViewController_2.swift, name:"AttestationInfoViewController.swift")
+            }
+            
+            @Step {
+                There are two buttons on the screen, each one will need a function created to handle a press event. These will be called onCancelClick & onRegisterClick for the cancel and register buttons respectively. The cancel button will take a user back to the landing page, and the onRegisterClick will initiate the registration process on the chosen service.
+                
+                @Code(file:AttestationInfoViewController_3.swift, name:"AttestationInfoViewController.swift")
+            }
+            
+            @Step {
+                Extensions to the AttestationInfoViewController will be made using a PublicKeyCredentialDelegate protocol, and will contain functions that will handle errors and attestation results from the server.
+                
+                @Code(file:AttestationInfoViewController_4.swift, name:"AttestationInfoViewController.swift")
+            }
+            
+            @Step {
+                Once FIDO2 registration is complete, in order to authenticate a user the assertion ceremony must be completed. The following pages will handle the Assertion request and the assertion confirmation screens. The first page we will create will be an `AssertionViewController.swift`. We will define the screen element variables which will automatically link to the values defined in our storyboard file.
+                
+                @Code(file:AssertionViewController_1.swift, name:"AssertionViewController.swift")
+            }
+            
+            @Step {
+                We will create the constants used for the application, as well as the functions to handle vartiable initialisation and constraints when the page is needed.
+                
+                @Code(file:AssertionViewController_2.swift, name:"AssertionViewController.swift")
+            }
+            
+            @Step {
+                In order to improve the conciseness of repeated code, we will define some functions that will animate the logo on screen, and set the appearance of the screen based on the settings of the device.
+                
+                @Code(file:AssertionViewController_3.swift, name:"AssertionViewController.swift")
+            }
+            
+            @Step {
+                As defined in the `Main.storyboard` file, there are two buttons on the screen for authenticators. Remove and authenticate. We will add the functionality for these two functions, with authenticate triggering an assertation to the service, and remove will remove the authenticator from the device, but will still require manual deletion from the relying party.
+                
+                @Code(file:AssertionViewController_4.swift, name:"AssertionViewController.swift")
+            }
+            
+            @Step {
+                Similar to the attestation view controller, we shall create an extension for the AssertationViewController conforming to the PublicKeyCredentialDelegate protocal, which will handle errors and the results from the assertion request.
+                
+                @Code(file:AssertionViewController_5.swift, name:"AssertionViewController.swift")
+            }
+            
+            @Step {
+                The final view controller to be created will show on screen the status of the assertation process, and inform the user if it was a success or a fail. This new file will be called `AssertionInfoViewController.swift`.
+                
+                @Code(file:AssertionInfoViewController_1.swift, name:"AssertionInfoViewController.swift")
+            }
+            
+            @Step {
+                The viewDidLoad function for this viewController contains a lot of functionality, which will perform the authentication after it has been handed control by the AssertionViewController. As this page is only loaded once the assertation has been requested, the network request shall be made as the page loads. Two constant variables will also be defined for use in this file.
+                
+                @Code(file:AssertionInfoViewController_2.swift, name:"AssertionInfoViewController.swift")
+            }
+            
+            @Step {
+                Next step is to create functions for handling the rendering of the data to the screen once it has been receieved from the assertion request. This is done by the modification of screen elements, and the creation of new ones.
+                
+                @Code(file:AssertionInfoViewController_3.swift, name:"AssertionInfoViewController.swift")
+            }
+            
+            @Step {
+                The final step of the project is the creation of a function to handle the close button on the screen, which will simply perform a segue, that will call unwindToAssertionView.
+                
+                @Code(file:AssertionInfoViewController_4.swift, name:"AssertionInfoViewController.swift")
+            }
+        }
+    }
+}

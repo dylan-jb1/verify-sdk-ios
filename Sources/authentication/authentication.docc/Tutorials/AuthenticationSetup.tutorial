@@ -5,22 +5,27 @@
         @Image(source: eye-bee-m.jpeg, alt: "The IBM Logo")
     }
     
-    @Section(title: "Create a new project and add the Authentication SDK") {
+    @Section(title: "Create an example app that utilises the Authentication SDK") {
         @ContentAndMedia {
-            Create and configure an Xcode project that uses the Verify SDK Authentication package.
+            Create and configure an iOS Application that uses the Verify SDK Authentication package.
         }
         
         @Steps {
             @Step {
-                Open XCode and create a new project using the iOS App template.
+                Open XCode and create a new project.
+                
+                @Image(source: step_1_new_project.png, alt: "The new project screen for XCode, with the 'New Project' button highlighted.")
+            }
+            @Step {
+                Select the iOS App template.
 
                 @Image(source: step_2_iOS_template.png, alt: "A screenshot of the new application pop-up on XCode, highlighting the 'App' and the 'Next' buttons.")
             }
             
             @Step {
-                Enter "Auth Test" as the Product Name.
+                Enter "AuthTest" as the Product Name.
                 
-                @Image(source: step_3_name_project.png, alt: "A screenshot of the configuration screen when creating a new project, with the name box highlighted with text that says 'Auth Test'")
+                @Image(source: step_3_name_project.png, alt: "A screenshot of the configuration screen when creating a new project, with the name box highlighted with text that says 'AuthTest'")
             }
             
             @Step {
@@ -45,6 +50,129 @@
                 Select "Authentication" from the checklist menu, and then press "Add Package."
                 
                 @Image(source: step_7_authentication_check.png, alt: "A screenshot of the 'Add Package' pop-up menu with the Authentication SDK ticked in the package select screen.")
+            }
+            
+            @Step {
+                Now that your App is created, you should have a directory AuthTest with the two files `AuthTestApp.swift` and `ContentView.swift`
+            }
+        }
+    }
+        
+    @Section(title: "Creating the Main Interface") {
+        @ContentAndMedia {
+            Create a non functional interface for the application in preparation.
+        }
+        
+        @Steps {
+            @Step {
+                We can begin by modifying `ContentView.swift` and adding some variables that we will put to use later.
+                
+                @Code(file: AuthenticationSetup_ContentView_2.swift, previousFile: AuthenticationSetup_ContentView_1.swift, name: "ContentView.swift")
+            }
+            
+            @Step {
+                Since we intend to have multiple pages to this application, we will add a navigation view that will replace the example "Hello world!" code already in the file.
+                
+                @Code(file: AuthenticationSetup_ContentView_3.swift, name: "ContentView.swift")
+            }
+            
+            @Step {
+                The finished view of this screen will be an interface that has text input to determine the values of the variables, and a button to confirm this. We can add the framework of this setup now, with the Get Started button and a graphic that gives the user some information.
+                
+                @Code(file: AuthenticationSetup_ContentView_4.swift, name: "ContentView.swift") {
+                    @Image(source: AuthenticationSetup_preview_4.png, alt: "A screenshot of the current app display, with the info text shown in the center of the screen, with a Get Started button at the bottom of the screen." )
+                }
+            }
+            
+            @Step {
+                The next step is to add the text input boxes. As there are more boxes than will fit on the screen, this will be done via a ScrollViewReader. These text boxes will have their inputs fed into their respective variables defined in step 1. We will also add 2 toggles for configuration options.
+                
+                @Code(file: AuthenticationSetup_ContentView_5.swift, name: "ContentView.swift") {
+                    @Image(source: AuthenticationSetup_preview_5.png, alt: "A screenshot of the current app display, with the info text shown in the center of the screen, with a Get Started button at the bottom of the screen, and now a scrollable series of text input fields." )
+                }
+            }
+            
+            @Step {
+                This is almost the final design for the interface. In order to be able to finish it properly, we first need to add some functionality to the application.
+            }
+            
+        }
+    }
+    
+    @Section(title: "Create Authentication functionality") {
+        @ContentAndMedia {
+            The following section will cover the creation of a SigninViewModel that will handle the Authentication part of the application.
+        }
+        
+        @Steps {
+            @Step {
+                We will create a new file called 'SigninViewModel.swift', and import the three packages `Foundation`, `Authentication`, and `AuthenticationServices`. This will serve as our authenticator.
+                
+                @Code(file: AuthenticationSetup_SigninViewModel_1.swift, name: "SigninViewModel.swift")
+            }
+            
+            @Step {
+                Define a class called SigninViewModel, of type NSObject with protocol ObservableObject. We will also define some variables that will be used later.
+                
+                @Code(file: AuthenticationSetup_SigninViewModel_2.swift, name: "SigninViewModel.swift")
+            }
+            
+            @Step {
+                Inside of this class we will define a function called `performSignin`. This function will handle the authentication.
+                
+                @Code(file: AuthenticationSetup_SigninViewModel_3.swift, name: "SigninViewModel.swift")
+            }
+            
+            @Step {
+                We add the configuration of the OAuth provider and use this provider to authorise the user with the browser.
+                
+                @Code(file: AuthenticationSetup_SigninViewModel_4.swift, name: "SigninViewModel.swift")
+            }
+            
+            @Step {
+                The SigninViewModel requires two extensions of functionality, which will be added in this step.
+                
+                @Code(file: AuthenticationSetup_SigninViewModel_5.swift, name: "SigninViewModel.swift")
+            }
+            
+            @Step {
+                We can now go back to the previous `ContentView.swift` file and add the SigninViewModel as an environment object. This allows us to add functionality to our button, which will now call the previously created performSignin function.
+                
+                @Code(file: AuthenticationSetup_ContentView_6.swift, previousFile: AuthenticationSetup_ContentView_5.swift, name: "ContentView.swift")
+            }
+        }
+    }
+        
+    @Section(title: "View the returned token") {
+        @ContentAndMedia {
+            Now that we have been able to successfully validate ourselves via the Authorization SDK using an authorization server, we can create an interface to interact with and view this information.
+        }
+        
+        @Steps {
+            @Step {
+                We will create a new file called `TokenView.swift`, which will represent a new screen that will display our token info.
+                
+                @Code(file: AuthenticationSetup_TokenView_1.swift, name: "TokenView.swift")
+            }
+            
+            @Step {
+                We can access the received information through the shared environment variable `viewModel` that we defined before.
+                
+                @Code(file: AuthenticationSetup_TokenView_2.swift, name: "TokenView.swift")
+            }
+            
+            @Step {
+                We can create a form that we will populate with the values stored in the viewModel environment variable.
+                
+                @Code(file: AuthenticationSetup_TokenView_3.swift, name: "TokenView.swift")
+            }
+            
+            @Step {
+                And finally, we have to create a button that will open this page from the main screen.
+                
+                @Code(file: AuthenticationSetup_ContentView_7.swift, previousFile: AuthenticationSetup_ContentView_6.swift, name: "ContentView.swift") {
+                    @Image(source: AuthenticationSetup_preview_6.png, alt: "A screenshot of the token view page, with the returned token information filled out.")
+                }
             }
         }
     }

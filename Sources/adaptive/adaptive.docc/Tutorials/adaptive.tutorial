@@ -1,0 +1,14 @@
+@Tutorials(name: "Adaptive SDK") {
+    @Intro(title: "Getting started with Adaptive") {
+        Create an application that can utilise the power of the Adaptive system to assess devices based on cloud risk policies, and evaluate authorization challenges.
+        
+    }
+    
+    @Chapter(name: "Adaptive Setup") {
+        @Image(source: eye-bee-m.png, alt: "The IBM logo.")
+        
+        Create an example application that can utilise the Adaptive SDK to perform risk and policy evaluation.
+        
+        @TutorialReference(tutorial: "doc:AdaptiveSetup")
+    }
+}
