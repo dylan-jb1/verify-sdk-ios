@@ -513,7 +513,7 @@ public class PublicKeyCredentialProvider {
 // MARK: Protocols
 
 /// An interface for providing information about the outcome of an attestation or assertion attempt.
-public protocol PublicKeyCredentialDelegate: AnyObject {
+public protocol PublicKeyCredentialDelegate {
     /// Tells the delegate when an attestion or assertion attempt fails, and provides an error explaining why.
     /// - parameter provider: The provider that performs the attestation or assertion attempt.
     /// - parameter error: An error that explains the failure.
