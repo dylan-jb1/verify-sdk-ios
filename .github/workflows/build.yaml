@@ -9,6 +9,7 @@ on:
     - main
     - github_actions_build
     - github_actions_build_test
+    - fido2-sdk-test
     tags:
       - 'v*'
 
