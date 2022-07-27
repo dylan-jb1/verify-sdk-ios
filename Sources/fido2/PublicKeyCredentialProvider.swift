@@ -58,7 +58,7 @@ public class PublicKeyCredentialProvider {
     }
     
     /// A delegate that the public key provider informs about the success or failure of an attestation or assertion attempt.
-    public weak var delegate: PublicKeyCredentialDelegate?
+    public var delegate: PublicKeyCredentialDelegate?
     
     /// Creates a public key credential registration request with the authenticator identifier, attestation format provider and options representing the request.
     /// - parameter aaguid: The AAGUID of the authenticator.  Default is  "00000000-0000-0000-0000-000000000000".
