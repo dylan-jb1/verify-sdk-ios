@@ -280,11 +280,6 @@ extension HTTPResource where T == () {
     public init(_ method: method = .get, url: URL, accept: ContentType? = nil, contentType: ContentType? = nil, body: Data? = nil, headers: [String: String] = [:],  timeOutInterval: TimeInterval = 60, queryParams: [String: String] = [:]) {
         self.init(method, url: url, accept: accept, contentType: contentType, body: body, headers: headers, timeOutInterval: timeOutInterval, queryParams: queryParams, parse: { _, _ in .success(()) })
     }
-
-    public init<V: Encodable>(json method: method, url: URL, accept: ContentType? = nil, contentType: ContentType? = nil, body: V? = nil, headers: [String: String] = [:],  timeOutInterval: TimeInterval = 60, queryParams: [String: String] = [:], encoder: JSONEncoder = JSONEncoder()) {
-        let value = body.map { try! encoder.encode($0) }
-        self.init(method, url: url, accept: accept, body: value, headers: headers, timeOutInterval: timeOutInterval, queryParams: queryParams) 
-    }
 }
 
 extension HTTPResource where T: Decodable {
