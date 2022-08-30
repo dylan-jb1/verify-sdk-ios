@@ -23,12 +23,14 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
+      - uses: fwal/setup-swift@2040b795e5c453c3a05fcb8316496afc8a74f192
+        with:
+          swift-version: "5.6.0"
       - name: Checkout swift-docc repo
         uses: actions/checkout@v2
         with:
           repository: apple/swift-docc
           path: swift-docc
-          ref: 'release/5.6'
 
       - name: Generate Symbol Graphs
         run: |
