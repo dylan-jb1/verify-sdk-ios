@@ -23,9 +23,12 @@ jobs:
     steps:
       - name: Git checkout
         uses: actions/checkout@v2
+      - name: Fetch swift-tools version number
+        id: swift_tools_version
+        run: echo "::set-output name=version_number::$(grep swift-tools-version: Package.swift | awk -F: '{gsub(/[ \t]+/, "", $2);print "\"" $2 "\""}')"
       - uses: swift-actions/setup-swift@v1
         with:
-          swift-version: "5.6"
+          swift-version: ${{steps.swift_tools_version.outputs.version_number}}
       - name: Checkout swift-docc repo
         uses: actions/checkout@v2
         with:
