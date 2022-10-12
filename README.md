@@ -20,11 +20,11 @@ Releases of all packages are available here: [Releases](https://github.com/ibm-s
 The following components are currently offered in the package.
 | Component | Description |
 | ----------- | ----------- |
-| [FIDO2](sdk/fido2) | The FIDO2™ component is a native implementation of attestation and assertion ceremonies.  Essentially providing the equivalent of WebAuthn's `navigator.credentials.create()` and `navigator.credentials.get()` for native mobile apps.|
-| [Adaptive](sdk/adaptive) | The IBM Security Verify Adaptive SDK provides device assessment. Based on cloud risk policies, authentication and authorization challenges can be evaluated.|
-| [Core](sdk/core) | The IBM Security Verify Core SDK provides common Keychain and networking functionality across the other components in the IBM Security Verify SDK offering.|
-| [Authentication](sdk/authentication) | The IBM Security Verify Authentication SDK is an implementation of OAuth 2.0 and OIDC targeting mobile use cases.|
-| [MFA](sdk/mfa) | The IBM Security Verify MFA SDK provides multi-factor authentication support for creating authenticators and processing transactions.|
+| [FIDO2](Sources/fido2) | The FIDO2™ component is a native implementation of attestation and assertion ceremonies.  Essentially providing the equivalent of WebAuthn's `navigator.credentials.create()` and `navigator.credentials.get()` for native mobile apps.|
+| [Adaptive](Sources/adaptive) | The IBM Security Verify Adaptive SDK provides device assessment. Based on cloud risk policies, authentication and authorization challenges can be evaluated.|
+| [Core](Sources/core) | The IBM Security Verify Core SDK provides common Keychain and networking functionality across the other components in the IBM Security Verify SDK offering.|
+| [Authentication](Sources/authentication) | The IBM Security Verify Authentication SDK is an implementation of OAuth 2.0 and OIDC targeting mobile use cases.|
+| [MFA](Sources/mfa) | The IBM Security Verify MFA SDK provides multi-factor authentication support for creating authenticators and processing transactions.|
 
 
 ### Installation
