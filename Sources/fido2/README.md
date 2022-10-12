@@ -5,7 +5,7 @@ of WebAuthn's `navigator.credentials.create()` and `navigator.credentials.get()`
 
 
 ## Example
-An [example](../../examples/fido2) application is available for the FIDO2 SDK.
+An [example](../../Examples/fido2) application is available for the FIDO2 SDK.
 
 
 ## Getting started
