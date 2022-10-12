@@ -124,7 +124,7 @@ struct Post: Codable {
 let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
 let resource = HttpResource<[Post]>(json: .get, url: url)
         
-URLSession.shared.dataTask(for: resource) { result in
+try await URLSession.shared.dataTask(for: resource) { result in
    switch result {
       case .success(let value):
          print(value)
@@ -146,7 +146,7 @@ struct Post: Codable {
 let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
 let resource = HttpResource<[Post]>(json: .get, url: url, queryParams: ["userId": "1"])
         
-URLSession.shared.dataTask(for: resource) { result in
+try await URLSession.shared.dataTask(for: resource) { result in
    switch result {
       case .success(let value):
          print(value)
@@ -170,7 +170,7 @@ let resource = HttpResource<[Post]>(request: request, parse: { data, response in
    }
 })
 
-URLSession.shared.dataTask(for: resource) { result in
+try await URLSession.shared.dataTask(for: resource) { result in
    switch result {
       case .success(let value):
          print(value)
@@ -193,7 +193,7 @@ let resource = HttpResource<UIImage>(.get, url: url, accept: .jpeg) { data, resp
    }
 }
         
-URLSession.shared.dataTask(for: resource) { result in
+try await URLSession.shared.dataTask(for: resource) { result in
    switch result {
    case .success(let image):
       // Do something with the image.
@@ -209,7 +209,7 @@ let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
 let posts = HttpResource<[Post]>(json: .get, url: url)
 let firstPost = posts.map{ $0.first }
         
-URLSession.shared.dataTask(for: firstPost) { result in
+try await URLSession.shared.dataTask(for: firstPost) { result in
    switch result {
       case .success(let value):
          print(value)
