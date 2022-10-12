@@ -4,7 +4,7 @@ The Authentication software development kit (SDK) enables applications to obtain
 
 
 ## Example
-An [example](../../examples/authentication) application is available for the Authentication SDK
+An [example](../../Examples/authentication) application is available for the Authentication SDK
 
 ## Getting started
 
