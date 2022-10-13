@@ -49,6 +49,7 @@ jobs:
           cp -a ../Sources/authentication/authentication.docc/. ../.build/iOS-SDK.docc/ || true
           cp -a ../Sources/core/core.docc/. ../.build/iOS-SDK.docc/ || true
           cp -a ../Sources/fido2/fido2.docc/. ../.build/iOS-SDK.docc/ || true
+          cp -a ../Sources/mfa/mfa.docc/. ../.build/iOS-SDK.docc/ || true
 
           swift run docc convert ../.build/iOS-SDK.docc \
             --fallback-display-name iOS-SDK \
@@ -95,4 +96,3 @@ jobs:
           echo '```' >> $GITHUB_STEP_SUMMARY
           git diff --name-only HEAD~ >> $GITHUB_STEP_SUMMARY
           echo '```' >> $GITHUB_STEP_SUMMARY
-        
