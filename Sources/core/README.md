@@ -31,7 +31,7 @@ Alternatively, you can add the package manually.
 5. Enter `https://github.com/ibm-security-verify/verify-sdk-ios.git` as the respository URL and follow the remaining steps selecting the components to add to your project.
 
 ### API documentation
-The Core SDK API can be reviewed [here](https://ibm-security-verify.github.io/ios/core/docs/).
+The Core SDK API can be reviewed [here](https://ibm-security-verify.github.io/ios/documentation/core/).
 
 ### Importing the SDK
 
