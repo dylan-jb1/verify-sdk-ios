@@ -4,7 +4,7 @@ The MFA software development kit (SDK) enables applications to register authenti
 
 
 ## Example
-An [example](../../examples/mfa) application is available for the MFA SDK
+An [example](../../Examples/mfa) application is available for the MFA SDK
 
 ## Getting started
 

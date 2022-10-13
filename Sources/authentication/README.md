@@ -4,7 +4,7 @@ The Authentication software development kit (SDK) enables applications to obtain
 
 
 ## Example
-An [example](../../examples/authentication) application is available for the Authentication SDK
+An [example](../../Examples/authentication) application is available for the Authentication SDK
 
 ## Getting started
 
@@ -54,14 +54,8 @@ Discover the authorization service configuration from a compliant OpenID Connect
 ```swift
 let url = URL(string: "https://www.example.com/.well-known/openid-configuration")!
 
-OAuthProvider.discover(issuer: url) { result in
-    switch result {
-    case .success(let value):
-        print(value)
-    case .failure(let error):
-        print(error.localizedDescription)
-   }
-}
+let result = try await OAuthProvider.discover(issuer: url) { result in
+print(result)
 ```
 
 ### Authorization Code Flow (AZN)
@@ -194,14 +188,8 @@ let url = URL(string: "https://www.example.com/token")!
 let provider = OAuthProvider(clientId: "a1b2c3", additionalParameters: ["pet": "dog", "food": "pizza"])
 
 // Pass in optional scopes.
-provider.authorize(issuer: url, username: "testuser", password: "password", scope: ["name", "age"]) { result in
-    switch result {
-    case .success(let value):
-        print(value)
-    case .failure(let error):
-        print(error)
-    }
-}
+let result = try await provider.authorize(issuer: url, username: "testuser", password: "password", scope: ["name", "age"]) { result in
+print(result)
 ```
 
 ### Refreshing a Token
@@ -215,14 +203,8 @@ let url = URL(string: "https://www.example.com/token")!
 let provider = OAuthProvider(clientId: "a1b2c3")
 
 // Where `token` was previously obtained through an AZN code or ROPC flow.
-provider.refresh(issuer: url, refreshToken: token.refreshToken!, scope: ["name"]) { result in
-    switch result {
-    case .success(let value):
-        print(value)
-    case .failure(let error):
-        print(error)
-    }
-}
+let result = try await provider.refresh(issuer: url, refreshToken: token.refreshToken!, scope: ["name"]) { result in
+print(result)
 ```
 
 ### Decoding the ID Token Claims

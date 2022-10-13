@@ -4,7 +4,7 @@ The Adaptive software development kit (SDK) provides device assessment. Based on
 
 
 ## Example
-An [example](../../examples/adaptive) application is available for the Adaptive SDK.
+An [example](../../Examples/adaptive) application is available for the Adaptive SDK.
 
 ## Getting started
 
