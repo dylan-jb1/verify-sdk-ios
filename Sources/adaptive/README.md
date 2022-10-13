@@ -45,7 +45,7 @@ Alternatively, you can add the package manually.
 
 
 ### API documentation
-The Adaptive component API can be reviewed [here](https://ibm-security-verify.github.io/ios/adaptive/docs/).
+The Adaptive component API can be reviewed [here](https://ibm-security-verify.github.io/ios/documentation/adaptive/).
 
 ### Importing the SDK
 
