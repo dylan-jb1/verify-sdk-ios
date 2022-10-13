@@ -35,7 +35,7 @@ Alternatively, you can add the package manually.
 5. Enter `https://github.com/ibm-security-verify/verify-sdk-ios.git` as the respository URL and follow the remaining steps selecting the components to add to your project.
 
 ### API documentation
-The MFA SDK API can be reviewed [here](https://ibm-security-verify.github.io/ios/mfa/docs/).
+The MFA SDK API can be reviewed [here](https://ibm-security-verify.github.io/ios/documentation/mfa/).
 
 ### Importing the SDK
 
