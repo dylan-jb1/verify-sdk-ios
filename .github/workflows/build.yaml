@@ -45,12 +45,6 @@ jobs:
           git clone https://github.com/apple/swift-docc-render-artifact.git
           export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
 
-          cp -a ../Sources/adaptive/adaptive.docc/. ../.build/iOS-SDK.docc/ || true
-          cp -a ../Sources/authentication/authentication.docc/. ../.build/iOS-SDK.docc/ || true
-          cp -a ../Sources/core/core.docc/. ../.build/iOS-SDK.docc/ || true
-          cp -a ../Sources/fido2/fido2.docc/. ../.build/iOS-SDK.docc/ || true
-          cp -a ../Sources/mfa/mfa.docc/. ../.build/iOS-SDK.docc/ || true
-
           swift run docc convert ../.build/iOS-SDK.docc \
             --fallback-display-name iOS-SDK \
             --fallback-bundle-identifier com.ibm.iOS-SDK \
@@ -63,7 +57,7 @@ jobs:
         run: |
           git clone https://github.com/ibm-security-verify/ibm-security-verify.github.io.git
           cd ibm-security-verify.github.io
-          git checkout ios-documentation
+          git checkout master
           cd ..
           rm -r ibm-security-verify.github.io/ios/*
           mkdir -p ibm-security-verify.github.io/ios/
