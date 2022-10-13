@@ -96,15 +96,16 @@ extension SigninViewController: OAuthProviderDelegate {
         print(error.localizedDescription)
     }
 
+    @MainActor
     func oauthProvider(provider: OAuthProvider, didCompleteWithCode result: (code: String, state: String?)) {
         
         // Exchange the authorization code for an access token.
-        provider.authorize(issuer: tokenURL!, redirectUrl: self.redirectURL, authorizationCode: result.code) { result in
-         
-            switch result {
-            case .success(let token):
+        Task {
+            do {
+                let result = try await provider.authorize(issuer: tokenURL!, redirectUrl: self.redirectURL, authorizationCode: result.code)
                 print("save \(token)")
-            case .failure(let error):
+            }
+            catch let error {
                 print("error \(error.localizedDescription)")
             }
         }
@@ -158,18 +159,16 @@ extension SigninViewController: OAuthProviderDelegate {
         print(error.localizedDescription)
     }
 
+    @MainActor
     func oauthProvider(provider: OAuthProvider, didCompleteWithCode result: (code: String, state: String?)) {
         
         // Exchange the authorization code for an access token with the code verifier.
-        provider.authorize(issuer: tokenURL!, 
-            redirectUrl: self.redirectURL, 
-            authorizationCode: result.code,
-            codeVerifier: self.codeVerifier) { result in
-         
-            switch result {
-            case .success(let token):
+        Task {
+            do {
+                let result = try await provider.authorize(issuer: tokenURL!, redirectUrl: self.redirectURL, authorizationCode: result.code, codeVerifier: self.codeVerifier) 
                 print("save \(token)")
-            case .failure(let error):
+            }
+            catch let error {
                 print("error \(error.localizedDescription)")
             }
         }
@@ -188,7 +187,7 @@ let url = URL(string: "https://www.example.com/token")!
 let provider = OAuthProvider(clientId: "a1b2c3", additionalParameters: ["pet": "dog", "food": "pizza"])
 
 // Pass in optional scopes.
-let result = try await provider.authorize(issuer: url, username: "testuser", password: "password", scope: ["name", "age"]) { result in
+let result = try await provider.authorize(issuer: url, username: "testuser", password: "password", scope: ["name", "age"])
 print(result)
 ```
 
@@ -203,7 +202,7 @@ let url = URL(string: "https://www.example.com/token")!
 let provider = OAuthProvider(clientId: "a1b2c3")
 
 // Where `token` was previously obtained through an AZN code or ROPC flow.
-let result = try await provider.refresh(issuer: url, refreshToken: token.refreshToken!, scope: ["name"]) { result in
+let result = try await provider.refresh(issuer: url, refreshToken: token.refreshToken!, scope: ["name"])
 print(result)
 ```
 
