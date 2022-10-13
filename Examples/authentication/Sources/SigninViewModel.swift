@@ -54,17 +54,15 @@ extension SignInViewModel: OAuthProviderDelegate {
         print(error.localizedDescription)
     }
     
-    func oauthProvider(provider: OAuthProvider, didCompleteWithCode result: (code: String, state: String?)) {
-        
-        provider.authorize(issuer: tokenURL!, redirectUrl: self.redirectURL, authorizationCode: result.code, codeVerifier: self.codeVerifier) { result in
-         
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let token):
-                    self.token = token
-                case .failure(let error):
-                    print("error \(error.localizedDescription)")
-                }
+    @MainActor
+    func oauthProvider(provider: OAuthProvider, didCompleteWithCode result: (code: String, state: String?))  {
+        Task {
+            do {
+                let result = try await provider.authorize(issuer: tokenURL!, redirectUrl: self.redirectURL, authorizationCode: result.code, codeVerifier: self.codeVerifier)
+                self.token = result
+            }
+            catch let error {
+                print("error \(error.localizedDescription)")
             }
         }
     }
