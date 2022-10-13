@@ -60,7 +60,7 @@ jobs:
 
       - name: Push to I/O repo
         run: |
-          git clone https://github.com/craigaps/ibm-security-verify.github.io.git
+          git clone https://github.com/ibm-security-verify/ibm-security-verify.github.io.git
           cd ibm-security-verify.github.io
           git checkout ios-documentation
           cd ..
@@ -72,7 +72,7 @@ jobs:
           git commit -m "[GitHub Actions] Auto-Documentation Update"
           git status
           git config --get remote.origin.url
-          git remote set-url origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/craigaps/ibm-security-verify.github.io.git
+          git remote set-url origin https://${{ secrets.API_TOKEN_GITHUB }}@github.com/ibm-security-verify/ibm-security-verify.github.io.git
           git push origin
           git config --get remote.origin.url
   job_summary:
@@ -88,7 +88,7 @@ jobs:
         run: |
           echo '## Build Summary :white_check_mark:' >> $GITHUB_STEP_SUMMARY
           echo '### Documentation' >> $GITHUB_STEP_SUMMARY
-          echo 'The documentation has been successfully created, and can be accessed [here.](https://craigaps.github.io/ibm-security-verify.github.io/)' >> $GITHUB_STEP_SUMMARY
+          echo 'The documentation has been successfully created, and can be accessed [here.](https://ibm-security-verify.github.io/)' >> $GITHUB_STEP_SUMMARY
           echo '### Files Changed' >> $GITHUB_STEP_SUMMARY
           echo -n 'Count: '  >> $GITHUB_STEP_SUMMARY
           git diff --name-only HEAD~ | wc -l | awk '{$1=$1;print}' >> $GITHUB_STEP_SUMMARY
