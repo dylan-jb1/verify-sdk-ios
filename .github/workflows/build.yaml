@@ -52,7 +52,7 @@ jobs:
             --fallback-bundle-version 1.0.0 \
             --additional-symbol-graph-dir ../.build/symbol-graphs
 
-          swift run docc process-archive transform-for-static-hosting --hosting-base-path ibm-security-verify.github.io/ios/ ../.build/iOS-SDK.docc/.docc-build
+          swift run docc process-archive transform-for-static-hosting --hosting-base-path ios/ ../.build/iOS-SDK.docc/.docc-build
 
       - name: Push to I/O repo
         run: |
