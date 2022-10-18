@@ -43,7 +43,7 @@ jobs:
           mkdir ../.build/iOS-SDK.docc
 
           git clone https://github.com/apple/swift-docc-render-artifact.git
-          export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
+          export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
 
           swift run docc convert ../.build/iOS-SDK.docc \
             --fallback-display-name iOS-SDK \
