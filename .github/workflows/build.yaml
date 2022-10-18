@@ -6,6 +6,7 @@ on:
   push:
     branches:
     - main
+    - build_testing
     tags:
       - 'v*'
 
@@ -44,6 +45,11 @@ jobs:
 
           git clone https://github.com/apple/swift-docc-render-artifact.git
           export DOCC_HTML_DIR="/Users/runner/work/verify-sdk-ios/swift-docc/swift-docc-render-artifact/dist"
+
+          pwd
+          ls
+
+          breakhere fail
 
           swift run docc convert ../.build/iOS-SDK.docc \
             --fallback-display-name iOS-SDK \
